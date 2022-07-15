@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <head>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="bulma.min.css">
+    <script src="util/crc32.js"></script>
+    <script src="util/dom-to-image.min.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
         <p class="title">WebBLE with Paperang</p>
         <div class="block">
             <button class="button" onclick="connect();">connect</button>
-            <button class="button" onclick="selfdiag()">Diagnostics</button>
+            <button class="button" onclick="printText()">Print</button>
+            <button class="button" onclick="bitmapRender()">Render</button>
+        </div>
+        <div class="block">
+            <textarea class="textarea" id="inputtext"></textarea>
         </div>
     </div>
 </body>
