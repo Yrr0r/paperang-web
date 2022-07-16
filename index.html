@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="bulma.min.css">
+    <link rel="stylesheet" href="util/bulma.min.css">
     <script src="util/crc32.js"></script>
-    <script src="util/dom-to-image.min.js"></script>
-    <script src="script.js"></script>
+    <script src="util/html2canvas.min.js"></script>
+    <script src="util/marked.min.js"></script>
+    <link rel="stylesheet" href="util/simplemde.min.css">
+    <script src="util/simplemde.min.js"></script>
+    <!--Main script append at the end of body-->
 </head>
 <body>
-    <div class="container">
-        <p class="title">WebBLE with Paperang</p>
+    <div class="container" style="max-width: 50em;">
+        <div class="block">
+            <p class="title">WebBLE with Paperang</p>
+        </div>
         <div class="block">
             <button class="button" onclick="connect();">connect</button>
-            <button class="button" onclick="printText()">Print</button>
-            <button class="button" onclick="bitmapRender()">Render</button>
+            <button class="button" onclick="selfdiag()">Print Diagnostics</button>
+            <button class="button" onclick="textRender('renderoutput')">Print</button>
         </div>
-        <div class="block">
-            <textarea class="textarea" id="inputtext"></textarea>
+        
+        
+        <div class="columns">
+            <div class="column">
+                <textarea id="editorarea"></textarea>
+            </div>
+            
+        </div>
+
+        <div class="content">
+            <div id="renderoutput" style="display: none;"></div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
