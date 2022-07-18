@@ -18,14 +18,6 @@ var simplemde = new SimpleMDE({
 });
 
 
-/*
-Some useful facts about printers:
-    service: 49535343-fe7d-4ae5-8fa9-9fafd205e455
-characteristics values are
-    Write to:  49535343-6daa-4d02-abf6-19569aca69fe
-    notify: 49535343-1e4d-4bd9-ba61-23c647249616
-On BLE, max size of one pack is 512, means 502 for each data pack.
-*/
 async function connect() {
     // Call browser popup to let user select device
     let printer = await navigator.bluetooth.requestDevice({
@@ -41,11 +33,25 @@ async function connect() {
     notify.startNotifications().then(() => {
         notify.addEventListener('characteristicvaluechanged', (event) => {
             let value = event.target.value;
-            let a = new DataView(value)
             // Convert raw data bytes to hex values just for the sake of showing something.
             // In the "real" world, you'd use data.getUint8, data.getUint16 or even
             // TextDecoder to process raw data bytes.
-            console.log('Notify:' , a);
+            let arr = new Array();
+            for(i=0; i<value.byteLength; i++){
+                arr.push(value.getUint8(i));
+            }
+            let payload = arr.slice(5, -5);
+            console.log('Command:' , arr[1], 'Payload:', payload);
+            if(payload.length < 11){
+                console.log(arr);
+            } else {
+                let decoded = '';
+                for(each in payload.slice(0, -11)){
+                    decoded += String.fromCharCode(payload[each]);
+                }
+                console.log('Ascii:', decoded);
+            }
+            
         })
     })
 }
