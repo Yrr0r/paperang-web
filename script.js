@@ -188,5 +188,7 @@ async function bitmapRender(elementid){
     console.log(encoded);
 
     // send to print
-    sendprint(encoded);
+    await sendprint(encoded);
+
+    await sockchar.writeValue(genpack(26,[210]));
 }
